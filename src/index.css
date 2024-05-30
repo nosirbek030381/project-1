@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+	background-color: #eff5ff;
+	background-image: url(./assets/bg.svg);
+	background-size: 5%;
+	background-blend-mode: color;
+}
+
+.form__input {
+	background-color: #eff5ff;
+	background-image: url(./assets/bg.svg);
+	background-size: 15%;
+	background-blend-mode: color;
+}
