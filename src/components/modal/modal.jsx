@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import ReactImageMagnify from 'react-image-magnify';
+import 'react-medium-image-zoom/dist/styles.css';
 import { useNavigate } from 'react-router-dom';
 import RentalForm from './form-input';
 
@@ -29,18 +30,29 @@ const Modal = ({ product, onClose }) => {
 				</button>
 				<div className='flex flex-col md:flex-row-reverse w-full'>
 					<div className='md:w-full h-auto mb-4 md:mx-4 rounded-lg'>
+						{/* <Zoom>
+							<img
+								src={selectedThumbnail}
+								alt='Product Image'
+								className='w-full h-auto rounded-lg'
+							/>
+						</Zoom> */}
 						<ReactImageMagnify
 							{...{
 								smallImage: {
-									alt: 'Wristwatch by Ted Baker London',
+									alt: 'Product Image',
 									isFluidWidth: true,
 									src: selectedThumbnail,
 								},
 								largeImage: {
 									src: selectedThumbnail,
-									width: 700,
-									height: 500,
+									width: 300,
+									height: 300,
 								},
+								lensStyle: { backgroundColor: 'rgba(0,0,0,.6)' },
+								isHintEnabled: true,
+								hintTextMouse: 'Click to Zoom',
+								enlargedImagePosition: 'over',
 							}}
 						/>
 					</div>

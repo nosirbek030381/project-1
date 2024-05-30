@@ -40,15 +40,19 @@ const Detail = () => {
 							<ReactImageMagnify
 								{...{
 									smallImage: {
-										alt: 'Wristwatch by Ted Baker London',
+										alt: 'Product Image',
 										isFluidWidth: true,
 										src: selectedThumbnail,
 									},
 									largeImage: {
 										src: selectedThumbnail,
-										width: 700,
-										height: 500,
+										width: 300,
+										height: 300,
 									},
+									lensStyle: { backgroundColor: 'rgba(0,0,0,.6)' },
+									isHintEnabled: true,
+									hintTextMouse: 'Click to Zoom',
+									enlargedImagePosition: 'over',
 								}}
 							/>
 						</div>
