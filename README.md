@@ -1,5 +1,9 @@
 # React + Vite
 
+## Demo
+
+https://project-1-sigma-two.vercel.app/
+
 ## Download project
 
 https://github.com/nosirbek030381/project-1/archive/refs/heads/main.zip
