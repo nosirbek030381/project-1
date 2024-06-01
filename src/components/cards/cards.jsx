@@ -16,6 +16,8 @@ const Cards = () => {
 		setSelectedProduct(null);
 	};
 
+	const thumb = products.map(item => item.thumbnails);
+
 	return (
 		<div className='mt-20'>
 			<section className='text-gray-600 body-font'>
@@ -55,7 +57,7 @@ const Cards = () => {
 					</div>
 				</div>
 			</section>
-			{isModalOpen && <Modal product={selectedProduct} onClose={handleCloseModal} />}
+			{isModalOpen && <Modal product={selectedProduct} onClose={handleCloseModal} thumb={thumb} />}
 		</div>
 	);
 };

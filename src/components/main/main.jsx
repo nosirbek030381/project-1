@@ -4,6 +4,7 @@ import Cards from '../cards/cards';
 import Footer from '../header/footer';
 import Header from '../header/header';
 import RentalForm from '../modal/form-input';
+import ImageMani from '../zoom/imageMani';
 
 const Main = () => {
 	const [isFormVisible, setIsFormVisible] = useState(false);
@@ -34,6 +35,12 @@ const Main = () => {
 				</div>
 			</div>
 			{isFormVisible && <RentalForm onClose={handleFormToggle} />}
+
+			<ImageMani
+				img={
+					'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZFsMo-w00y09aJykeWkXo7Nxudybu1fWKMQ&s'
+				}
+			/>
 			<Cards />
 			<Footer />
 		</>

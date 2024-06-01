@@ -15,3 +15,35 @@ body {
 	background-size: 15%;
 	background-blend-mode: color;
 }
+
+/*  */
+
+.img-magnifier-container {
+	position: relative;
+}
+
+.img-magnifier-glass {
+	position: absolute;
+	border: 3px solid #000;
+	cursor: none;
+	/* Sizning xohishingizga ko'ra kenglik va balandlikni o'rnating */
+	width: 200px;
+	height: 200px;
+	/* Backgroundning "zoom" darajasiga qarab sozlanadi */
+	background-color: rgba(0, 0, 0, 0.4);
+}
+
+.img_container {
+	position: relative;
+}
+
+.mani_img {
+	width: auto;
+	height: 80vh;
+}
+
+.mani_image {
+	width: 200px;
+	height: 200px;
+	border: 2px solid #fff;
+}

@@ -1,18 +1,18 @@
 import React, { useState } from 'react';
-import ReactImageMagnify from 'react-image-magnify';
 import 'react-medium-image-zoom/dist/styles.css';
 import { useNavigate } from 'react-router-dom';
+import MagnifierWrapper from '../zoom/zoom';
 import RentalForm from './form-input';
 
 const Modal = ({ product, onClose }) => {
-	const [selectedThumbnail, setSelectedThumbnail] = useState(product?.thumbnails[0]);
+	const [selectedThumbnailIndex, setSelectedThumbnailIndex] = useState(0);
 	const [isFormVisible, setIsFormVisible] = useState(false);
 	const navigate = useNavigate();
 
 	if (!product) return null;
 
-	const handleThumbnailClick = thumbnail => {
-		setSelectedThumbnail(thumbnail);
+	const handleThumbnailClick = thumbnailIndex => {
+		setSelectedThumbnailIndex(thumbnailIndex);
 	};
 
 	const handleFormToggle = () => {
@@ -30,33 +30,13 @@ const Modal = ({ product, onClose }) => {
 				</button>
 				<div className='flex flex-col md:flex-row-reverse w-full'>
 					<div className='md:w-full h-auto mb-4 md:mx-4 rounded-lg'>
-						{/* <Zoom>
-							<img
-								src={selectedThumbnail}
-								alt='Product Image'
-								className='w-full h-auto rounded-lg'
-							/>
-						</Zoom> */}
-						<ReactImageMagnify
-							{...{
-								smallImage: {
-									alt: 'Product Image',
-									isFluidWidth: true,
-									src: selectedThumbnail,
-								},
-								largeImage: {
-									src: selectedThumbnail,
-									width: 300,
-									height: 300,
-								},
-								lensStyle: { backgroundColor: 'rgba(0,0,0,.6)' },
-								isHintEnabled: true,
-								hintTextMouse: 'Click to Zoom',
-								enlargedImagePosition: 'over',
-							}}
+						<MagnifierWrapper
+							key={selectedThumbnailIndex}
+							children={product.thumbnails[selectedThumbnailIndex]}
+							zoomLevel={2}
 						/>
 					</div>
-					<div className='flex md:flex-col flex-wrap space-y-2'>
+					<div className='flex md:flex-col flex-wrap space-x-2 md:space-x-0 md:space-y-2 space-y-0'>
 						{product.thumbnails &&
 							product.thumbnails.map((thumbnail, index) => (
 								<img
@@ -64,9 +44,9 @@ const Modal = ({ product, onClose }) => {
 									src={thumbnail}
 									alt={`Thumbnail ${index + 1}`}
 									className={`w-16 h-16 object-cover rounded-lg border border-gray-200 cursor-pointer ${
-										selectedThumbnail === thumbnail ? 'border-yellow-500' : ''
+										selectedThumbnailIndex === index ? 'border-yellow-500' : ''
 									}`}
-									onClick={() => handleThumbnailClick(thumbnail)}
+									onClick={() => handleThumbnailClick(index)}
 								/>
 							))}
 					</div>

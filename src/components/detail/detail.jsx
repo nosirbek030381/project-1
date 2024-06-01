@@ -1,16 +1,16 @@
 import { useState } from 'react';
 
-import ReactImageMagnify from 'react-image-magnify';
 import { Link, useParams } from 'react-router-dom';
 import { products } from '../../constants/product';
 import Footer from '../header/footer';
 import Header from '../header/header';
 import RentalForm from '../modal/form-input';
+import MagnifierWrapper from '../zoom/zoom';
 
 const Detail = () => {
 	const { id } = useParams();
 	const selectedProduct = products.find(product => product.id == id);
-	const [selectedThumbnail, setSelectedThumbnail] = useState(selectedProduct?.thumbnails[0]);
+	const [selectedThumbnailIndex, setSelectedThumbnailIndex] = useState(0);
 	const [isFormVisible, setIsFormVisible] = useState(false);
 
 	if (!selectedProduct) {
@@ -18,8 +18,8 @@ const Detail = () => {
 		return null;
 	}
 
-	const handleThumbnailClick = thumbnail => {
-		setSelectedThumbnail(thumbnail);
+	const handleThumbnailClick = thumbnailIndex => {
+		setSelectedThumbnailIndex(thumbnailIndex);
 	};
 
 	const handleFormToggle = () => {
@@ -37,26 +37,13 @@ const Detail = () => {
 				<div className='bg-[#EFF5FF] pt-6 p-8 relative w-full h-full max-w-none flex flex-col lg:flex-row overflow-auto'>
 					<div className='flex flex-col md:flex-row-reverse w-full'>
 						<div className='md:w-full h-auto mb-4 md:mx-4 rounded-lg'>
-							<ReactImageMagnify
-								{...{
-									smallImage: {
-										alt: 'Product Image',
-										isFluidWidth: true,
-										src: selectedThumbnail,
-									},
-									largeImage: {
-										src: selectedThumbnail,
-										width: 300,
-										height: 300,
-									},
-									lensStyle: { backgroundColor: 'rgba(0,0,0,.6)' },
-									isHintEnabled: true,
-									hintTextMouse: 'Click to Zoom',
-									enlargedImagePosition: 'over',
-								}}
+							<MagnifierWrapper
+								key={selectedThumbnailIndex}
+								children={selectedProduct.thumbnails[selectedThumbnailIndex]}
+								zoomLevel={2}
 							/>
 						</div>
-						<div className='flex md:flex-col flex-wrap space-y-2 '>
+						<div className='flex md:flex-col flex-wrap space-x-2 md:space-x-0 md:space-y-2 space-y-0'>
 							{selectedProduct.thumbnails &&
 								selectedProduct.thumbnails.map((thumbnail, index) => (
 									<img
@@ -64,9 +51,9 @@ const Detail = () => {
 										src={thumbnail}
 										alt={`Thumbnail ${index + 1}`}
 										className={`w-16 h-16 object-cover rounded-lg border border-gray-200 cursor-pointer ${
-											selectedThumbnail === thumbnail ? 'border-yellow-500' : ''
+											selectedThumbnailIndex === index ? 'border-yellow-500' : ''
 										}`}
-										onClick={() => handleThumbnailClick(thumbnail)}
+										onClick={() => handleThumbnailClick(index)}
 									/>
 								))}
 						</div>
