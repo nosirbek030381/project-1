@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import 'react-medium-image-zoom/dist/styles.css';
 import { useNavigate } from 'react-router-dom';
 import MagnifierWrapper from '../zoom/zoom';
 import RentalForm from './form-input';
